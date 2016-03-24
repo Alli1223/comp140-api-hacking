@@ -11,9 +11,14 @@ I will attempt to create a API for their game using the C# language and in unity
 ##Ideas:
 + Implement Google Cloud API to save the unity's game save to their google drive account.
 
+This is a pay-what-you-use software so it may cost money to implement this feature, which is not ideal.
+
+https://developers.google.com/apis-explorer/#p/storage/v1/
+
 + Get a weather API to change the weather state in the game to the current weather at the players location
 
 This is a simple weather API that you can pass in your location and it will return the weather at that location.
+
 http://openweathermap.org/current
 
 
