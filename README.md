@@ -13,6 +13,9 @@ I will attempt to create a API for their game using the C# language and in unity
 
 + Get a weather API to change the weather state in the game to the current weather at the players location
 
+This is a simple weather API that you can pass in your location and it will return the weather at that location.
+http://openweathermap.org/current
+
 
 ##Trello Board:
 
