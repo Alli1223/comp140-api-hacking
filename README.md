@@ -17,6 +17,8 @@ There are many different weather APIs that I could find, so for my first sprint 
 
 ![text](https://raw.githubusercontent.com/Alli1223/comp140-api-hacking/master/Trello_Board/Screenshot%202016-03-24%2012.48.01.png "Trello board")
 
+![text](https://raw.githubusercontent.com/Alli1223/comp140-api-hacking/master/Trello_Board/Screenshot%202016-04-12%2019.00.44.png "Trello board at the start of the first sprint")
+
 ##References:
 
 http://docs.unity3d.com/ScriptReference/WWW.html
