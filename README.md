@@ -8,19 +8,9 @@ NB: this repository current does not contain a `.gitignore` file. I recommend yo
 For this project I am going to liaison for the BA team Gambit.
 I will attempt to create a API for their game using the C# language and in unity.
 
-##Ideas:
-+ Implement Google Cloud API to save the unity's game save to their google drive account.
+For my API project I am going to change the weather state in the game to the current weather at the players physical location IRL.
 
-This is a pay-what-you-use software so it may cost money to implement this feature, which is not ideal.
-
-https://developers.google.com/apis-explorer/#p/storage/v1/
-
-+ Get a weather API to change the weather state in the game to the current weather at the players location
-
-This is a simple weather API that you can pass in your location and it will return the weather at that location.
-
-http://openweathermap.org/current
-
+There are many different weather APIs that I could find, so for my first sprint I aim to have found the most appropriate weather API that could be integrated into the game.
 
 ##Trello Board:
 
