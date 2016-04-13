@@ -23,14 +23,14 @@ public class rainSpawn : MonoBehaviour
     public string location = "Falmouth";
     public string APIKey = "&APPID=d3dcece6b95e45b36bc819afc815e9ef";   //My personal API key that allows for upto 600 calls an hour
     public string APIUnits = "&units=metric"; //API unit standard - Metric or Imperial
-    public string APIFormat = "api.openweathermap.org/data/2.5/weather?q=";  //XML format &mode=xml
+    public string APIFormat = "";  //return format (default is string text)
 
 
     // Use this for initialization
     void Start()
     {
 
-        string url = "http://api.openweathermap.org/data/2.5/weather?q=Falmouth&APPID=d3dcece6b95e45b36bc819afc815e9ef&units=metric";
+        string url = APIHTTP + location + APIKey + APIUnits;
         WWW www = new WWW(url);
         StartCoroutine(WaitForRequest(www));
 
