@@ -34,10 +34,16 @@ public class rainSpawn : MonoBehaviour
         WWW www = new WWW(url);
         StartCoroutine(WaitForRequest(www));
 
+    }
 
-        string raintext = www.data;
 
-        if (raintext.Contains("RAIN"))
+    IEnumerator WaitForRequest(WWW www)
+    {
+        yield return www;
+
+        string API_Content = www.data;
+
+        if (API_Content.Contains("RAIN"))
         {
             rain.SetActive(true);
         }
@@ -47,105 +53,16 @@ public class rainSpawn : MonoBehaviour
         }
 
 
-    }
-    IEnumerator WaitForRequest(WWW www)
-    {
-        yield return www;
-
-
         // check for errors
         if (www.error == null)
         {
-            Debug.Log("WWW Ok!: " + www.data);
+            Debug.Log("Request Recieved!: " + www.data);
         }
         else {
             Debug.Log("WWW Error: " + www.error);
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-
-
-        //Concatinated XML Request
-        string APIurl = APIHTTP + location + APIKey + APIUnits + APIFormat;
-
-        //string API_Content = getAPIContent(string APIurl);
-        GetWeather();
-
-        string API_Content = getAPIContent(APIurl);
-
-
-        string raintext = API_Content;
-
-        if (raintext.Contains("RAIN"))
-        {
-            rain.SetActive(true);
-        }
-        else
-            rain.SetActive(false);
-            
-
-
-
-
-        //write xml function
-        //WriteXML(API_Content);
-
-
-        //readXML
-    }
-
-    IEnumerator GetWeather()
-    {
-        APIurl = "http://api.openweathermap.org/data/2.5/weather?q=Falmouth&APPID=d3dcece6b95e45b36bc819afc815e9ef&units=metric";
-        WWW www = new WWW(APIurl);
-        yield return www;
-        Debug.Log(www);
-        string APIcontent = www.text;
-        yield return APIcontent;
-    }
-
-    
-    public string getAPIContent(string APIurl)
-    {
-
-            WWW www = new WWW(APIurl);
-            string APIcontent = www.text;
-            return APIcontent;
-    }
-    
-
-    Write XML
-    public void WriteXML(string API_Content)
-    {
-        Debug.Log(API_Content);
-        string raintext = API_Content.Substring(0, API_Content.IndexOf("RAIN"));
-
-        if(raintext.Contains("RAIN"))
-        {
-            rain.SetActive(true);
-        }
-        else
-            rain.SetActive(false);
-    }
-
-    */
 
 
 
