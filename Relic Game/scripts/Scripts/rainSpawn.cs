@@ -12,22 +12,22 @@ public class rainSpawn : MonoBehaviour
 	public GameObject rain;
 
     public string APIurl;
-
     public string APIHTTP = "api.openweathermap.org/data/2.5/weather?q=";
     public string location = "Falmouth";
     public string APIKey = "&APPID=d3dcece6b95e45b36bc819afc815e9ef";   //My personal API key that allows for upto 600 calls an hour
     public string APIUnits = "&units=metric"; //API unit standard - Metric or Imperial
     public string APIFormat = "";  //return format (default is string text)
-    bool isWaiting;
+    private float update_time = 10f; //Update time in seconds
 
     // Use this for initialization
     void Start()
     {
 
             string url = APIHTTP + location + APIKey + APIUnits;
+        Debug.Log(url);
             WWW www = new WWW(url);
             //StartCoroutine(GetWeather(www));
-            StartCoroutine(UpdateWeather(10.0f, www));
+            StartCoroutine(UpdateWeather(update_time, www));
     }
 
 
@@ -61,19 +61,16 @@ public class rainSpawn : MonoBehaviour
         
     }
 
-    IEnumerator UpdateWeather(float waitTime, WWW www)
+    IEnumerator UpdateWeather(float update_time, WWW www)
     {
         while (true)
         {
-            yield return new WaitForSeconds(waitTime);
             StartCoroutine(GetWeather(www));
+            yield return new WaitForSeconds(update_time);
         }
     }
 
-
-
-
-
+    
 
         // Update is called once per frame
         void Update ()
