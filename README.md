@@ -30,8 +30,16 @@ ___
 ##Progress
 Using the weather API it can return a text file or an XML file, so I am going to return a XML file and read the current weather from that.
 
+If found that it was much easier to just return a string and use that to determine if it is raining, rather than writing and reading an XML file.
+
+I recently came up with the idea that I could string some APIs together to get the nearest city to the player and use that for the weather information instead. This means that the player will no longer have to specify their Location in the game menu(which is not currently implemented)
+
 
 ##Current APIs in use
+
+I used this API to get the weather at a city location:
+api.openweathermap.org
+
 I used this API to get the IP of the user:
 http://api.ipify.org/
 
