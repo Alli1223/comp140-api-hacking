@@ -31,4 +31,9 @@ ___
 Using the weather API it can return a text file or an XML file, so I am going to return a XML file and read the current weather from that.
 
 
+##Current APIs in use
+I used this API to get the IP of the user:
+http://api.ipify.org/
 
+I will then use this API to access which city the user is in:
+http://ipinfo.io/
