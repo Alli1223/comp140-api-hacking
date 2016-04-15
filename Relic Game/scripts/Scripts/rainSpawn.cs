@@ -11,13 +11,14 @@ public class rainSpawn : MonoBehaviour
 
 	public GameObject rain;
 
-    public string APIurl;
-    public string APIHTTP = "api.openweathermap.org/data/2.5/weather?q=";
+    
+    private string APIHTTP = "api.openweathermap.org/data/2.5/weather?q=";
     public string location;
-    public string APIKey = "&APPID=d3dcece6b95e45b36bc819afc815e9ef";   //My personal API key that allows for upto 600 calls an hour
-    public string APIUnits = "&units=metric"; //API unit standard - Metric or Imperial
-    public string APIFormat = "";  //return format (default is string text)
+    private string APIKey = "&APPID=d3dcece6b95e45b36bc819afc815e9ef";   //My personal API key that allows for upto 600 calls an hour
+    private string APIUnits = "&units=metric"; //API unit standard - Metric or Imperial
+    private string APIFormat = "";  //return format (default is string text)
     private float update_time = 10f; //Update time in seconds
+    
 
     // Use this for initialization
     void Start()
@@ -26,8 +27,9 @@ public class rainSpawn : MonoBehaviour
         WWW API_IP = new WWW(API_IP_URL);
 
         string url = APIHTTP + location + APIKey + APIUnits;
-
         WWW www = new WWW(url);
+  
+
         StartCoroutine(UpdateWeather(update_time, www, API_IP));
     }
 
@@ -67,19 +69,34 @@ public class rainSpawn : MonoBehaviour
     {
         while (true)
         {
-            StartCoroutine(GetWeather(www));
             StartCoroutine(GETIP(API_URL));
+            StartCoroutine(GetWeather(www));
+            
             yield return new WaitForSeconds(update_time);
         }
     }
 
 
+    //Returns the IP address of the user
     IEnumerator GETIP(WWW API_URL)
     {
         yield return API_URL;
-        string IP = API_URL.text;
-        Debug.Log(IP);
-        //StartCoroutine(GetLocation(IP));
+        string IP_Address = API_URL.text;
+        
+        //Starts another Coroutine to get the location based on that IP
+        StartCoroutine(GetLocation(IP_Address));
+        Debug.Log(IP_Address);
+    }
+
+    IEnumerator GetLocation(string IP_Address)
+    {
+        string IP_Location_URL_start = "http://ipinfo.io/";
+        string IP_Location_URL_end = "/city";
+        string IP_Location_URL = IP_Location_URL_start + IP_Address + IP_Location_URL_end;
+        WWW IP_Location = new WWW(IP_Location_URL);
+        yield return IP_Location;
+        location = IP_Location.text;
+        Debug.Log(location);
     }
 
         // Update is called once per frame
