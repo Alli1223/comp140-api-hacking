@@ -115,43 +115,22 @@ public class rainSpawn : MonoBehaviour
     {
         StringBuilder output = new StringBuilder();
 
+        // Create an XmlReader
         using (XmlReader reader = XmlReader.Create(new StringReader(XMLString)))
         {
-            XmlWriterSettings ws = new XmlWriterSettings();
-            ws.Indent = true;
-            using (XmlWriter writer = XmlWriter.Create(output, ws))
-            {
+            reader.ReadToFollowing("Weather");
+            reader.MoveToFirstAttribute();
+            string Weather = reader.Value;
+            output.AppendLine("The Weather value: " + Weather);
 
-                // Parse the file and display each of the nodes.
-                while (reader.Read())
-                {
-                    switch (reader.NodeType)
-                    {
-                        case XmlNodeType.Element:
-                            writer.WriteStartElement(reader.Name);
-                            break;
-                        case XmlNodeType.Text:
-                            writer.WriteString(reader.Value);
-                            break;
-                        case XmlNodeType.XmlDeclaration:
-                        case XmlNodeType.ProcessingInstruction:
-                            writer.WriteProcessingInstruction(reader.Name, reader.Value);
-                            break;
-                        case XmlNodeType.Comment:
-                            writer.WriteComment(reader.Value);
-                            break;
-                        case XmlNodeType.EndElement:
-                            writer.WriteFullEndElement();
-                            break;
-                    }
-                }
-
-            }
+            reader.ReadToFollowing("Value");
+            output.AppendLine("Content of the Value element: " + reader.ReadElementContentAsString());
         }
-        string XMLtext = output.ToString();
-        Debug.Log(XMLtext);
-        return XMLtext;
-        
+
+        string output_text = output.ToString();
+        Debug.Log(output_text);
+
+        return output_text;
     }
 
     // Update is called once per frame
@@ -159,8 +138,6 @@ public class rainSpawn : MonoBehaviour
     {
 
     }
-
-
 }
 
 
