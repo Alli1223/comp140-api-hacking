@@ -15,15 +15,14 @@ public class rainSpawn : MonoBehaviour
     private string APIKey = "&APPID=d3dcece6b95e45b36bc819afc815e9ef";   //My personal API key that allows for upto 600 calls an hour
     private string APIUnits = "&units=metric"; //API unit standard - Metric or Imperial
     private string APIFormat = "";  //return format (default is string text)(&mode=xml for XML)
-    private float update_time = 10f; //Update time in seconds
-    public string location;
+    private float update_time = 8f; //Update time in seconds
+    private string location;
 
     // Use this for initialization
     void Start()
     {
         StartCoroutine(UpdateWeather(update_time));
     }
-
 
     //Constantly calls the function GetWeather then waits a set amnmount of time
     IEnumerator UpdateWeather(float update_time)
@@ -82,6 +81,7 @@ public class rainSpawn : MonoBehaviour
         yield return www;
 
         string API_Content = www.text;
+        
 
         //If the weather API request contains the word "Rain" inside then set the rain animation to true
         //TODO: make this more robust by only checking the main weather condition
@@ -89,6 +89,7 @@ public class rainSpawn : MonoBehaviour
         {
             rain.SetActive(true);
             Debug.Log("It is Raining");
+            
         }
         else
         {
@@ -106,7 +107,51 @@ public class rainSpawn : MonoBehaviour
         {
             Debug.Log("WWW Error: " + www.error);
         }
+    }
 
+
+    //XML reader copied from https://msdn.microsoft.com/en-us/library/cc189056(v=vs.95).aspx
+    private string ReadXML(string XMLString)
+    {
+        StringBuilder output = new StringBuilder();
+
+        using (XmlReader reader = XmlReader.Create(new StringReader(XMLString)))
+        {
+            XmlWriterSettings ws = new XmlWriterSettings();
+            ws.Indent = true;
+            using (XmlWriter writer = XmlWriter.Create(output, ws))
+            {
+
+                // Parse the file and display each of the nodes.
+                while (reader.Read())
+                {
+                    switch (reader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            writer.WriteStartElement(reader.Name);
+                            break;
+                        case XmlNodeType.Text:
+                            writer.WriteString(reader.Value);
+                            break;
+                        case XmlNodeType.XmlDeclaration:
+                        case XmlNodeType.ProcessingInstruction:
+                            writer.WriteProcessingInstruction(reader.Name, reader.Value);
+                            break;
+                        case XmlNodeType.Comment:
+                            writer.WriteComment(reader.Value);
+                            break;
+                        case XmlNodeType.EndElement:
+                            writer.WriteFullEndElement();
+                            break;
+                    }
+                }
+
+            }
+        }
+        string XMLtext = output.ToString();
+        Debug.Log(XMLtext);
+        return XMLtext;
+        
     }
 
     // Update is called once per frame
