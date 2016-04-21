@@ -46,7 +46,7 @@ public class rainSpawn : MonoBehaviour
 
         //Starts another Coroutine to get the location based on that IP
         StartCoroutine(GetLocation(IP_Address));
-        //Debug.Log(IP_Address);
+        Debug.Log("Your IP address is: " + IP_Address);
     }
 
     IEnumerator GetLocation(string IP_Address)
@@ -58,7 +58,7 @@ public class rainSpawn : MonoBehaviour
         yield return IP_Location;
 
         string location = IP_Location.text;
-
+        Debug.Log("Your location is: " + location);
         StartCoroutine(GetWeather(location));
     }
 
@@ -82,24 +82,9 @@ public class rainSpawn : MonoBehaviour
         yield return www;
 
         string API_Content = www.text;
+
+        //Check the appripraite XML tags for the current weather. 
         ReadXML(API_Content);
-
-
-        //If the weather API request contains the word "Rain" inside then set the rain animation to true
-        //TODO: make this more robust by only checking the main weather condition
-        /*
-        if (API_Content.Contains("Rain"))
-        {
-            rain.SetActive(true);
-            Debug.Log("It is Raining");
-
-        }
-        else
-        {
-            rain.SetActive(false);
-            Debug.Log("It is not Raining");
-        }
-        */
 
         // check for errors
         if (www.error == null)
@@ -128,7 +113,7 @@ public class rainSpawn : MonoBehaviour
             string value = reader.Value;
             output.AppendLine("The Weather value: " + value);
             reader.ReadToFollowing("value");
-            Debug.Log(value);
+            Debug.Log("Weahter code is: " + value);
 
             resultvalue = Convert.ToInt32(value);
 
