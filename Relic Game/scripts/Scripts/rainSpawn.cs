@@ -23,6 +23,7 @@ public class rainSpawn : MonoBehaviour
     void Start()
     {
         StartCoroutine(UpdateWeather(update_time));
+        
     }
 
     //Constantly calls the function GetWeather then waits a set amnmount of time
@@ -40,7 +41,7 @@ public class rainSpawn : MonoBehaviour
     {
         string API_IP_URL = "api.ipify.org";
         WWW API_IP = new WWW(API_IP_URL);
-
+        
         yield return API_IP;
         string IP_Address = API_IP.text;
 
@@ -113,7 +114,7 @@ public class rainSpawn : MonoBehaviour
             string value = reader.Value;
             output.AppendLine("The Weather value: " + value);
             reader.ReadToFollowing("value");
-            Debug.Log("Weahter code is: " + value);
+            Debug.Log("The weather code is: " + value);
 
             resultvalue = Convert.ToInt32(value);
 
@@ -134,9 +135,8 @@ public class rainSpawn : MonoBehaviour
             //Clear OR Clouds
             else if (resultvalue >= 800 && resultvalue <= 804)
             {
-                Debug.Log("It's either clear or cloudy");
+                Debug.Log("It's either Clear or Cloudy");
                 rain.SetActive(false);
-
             }
 
             //Extreme
@@ -145,7 +145,6 @@ public class rainSpawn : MonoBehaviour
             {
                 Debug.Log("It's either clear or cloudy");
                 rain.SetActive(true);
-
             }
 
             output.AppendLine("Content of the Value element: " + reader.ReadElementContentAsString());
