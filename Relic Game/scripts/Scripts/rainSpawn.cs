@@ -66,16 +66,10 @@ public class rainSpawn : MonoBehaviour
     IEnumerator GetWeather(string location)
     {
         //TODO: FIX THIS TO USE THE GENERATED LOCATION#
-        if (location.Contains("Falmouth"))
-        {
-            location = "Falmouth";
-        }
-        else
-        {
-            location = "somewhereelse";
-        }
 
-
+        //Removes the spaces from the string that it returns      
+        location = location.Trim();
+        
         string url = APIHTTP + location + APIKey + APIUnits + APIFormat;
         WWW www = new WWW(url);
 
@@ -100,7 +94,7 @@ public class rainSpawn : MonoBehaviour
 
 
     //Weather condition codes http://openweathermap.org/weather-conditions
-    //XML reader copied from https://msdn.microsoft.com/en-us/library/cc189056(v=vs.95).aspx
+    //XML reader based off https://msdn.microsoft.com/en-us/library/cc189056(v=vs.95).aspx
     private string ReadXML(string XMLString)
     {
         StringBuilder output = new StringBuilder();
@@ -118,7 +112,7 @@ public class rainSpawn : MonoBehaviour
 
             resultvalue = Convert.ToInt32(value);
 
-             //Drizzle
+            //Drizzle
             if (resultvalue >= 300 && resultvalue <= 321)
             {
                 Debug.Log("It's Drizzling");
