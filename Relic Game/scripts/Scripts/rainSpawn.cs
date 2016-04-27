@@ -11,7 +11,7 @@ public class rainSpawn : MonoBehaviour
 {
 
     public GameObject rain;
-
+    public Animation rain_anim;
     private string APIHTTP = "api.openweathermap.org/data/2.5/weather?q=";
     private string APIKey = "&APPID=d3dcece6b95e45b36bc819afc815e9ef";   //My personal API key that allows for upto 60 calls a min
     private string APIUnits = "&units=metric"; //API unit standard - Metric or Imperial
@@ -116,6 +116,7 @@ public class rainSpawn : MonoBehaviour
             if (resultvalue >= 300 && resultvalue <= 321)
             {
                 Debug.Log("It's Drizzling");
+                rain_anim["Rain"].speed = 2;
                 rain.SetActive(true);
             }
 
@@ -124,9 +125,11 @@ public class rainSpawn : MonoBehaviour
             {
                 Debug.Log("It's either raining or drizzleing");
                 rain.SetActive(true);
+                rain_anim["Rain"].speed = 5;
             }        
 
             //Clear OR Clouds
+            //TODO: Fix the update bug when the setActive is false
             else if (resultvalue >= 800 && resultvalue <= 804)
             {
                 Debug.Log("It's either Clear or Cloudy");
@@ -134,7 +137,6 @@ public class rainSpawn : MonoBehaviour
             }
 
             //Extreme
-
             else if (resultvalue >= 900 && resultvalue <= 906)
             {
                 Debug.Log("It's either clear or cloudy");
