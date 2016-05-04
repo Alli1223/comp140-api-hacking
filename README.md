@@ -10,7 +10,7 @@ For my API project I am going to change the weather state in the game to the cur
 
 There are many different weather APIs that I could find, so for my first sprint I aim to have found the most appropriate weather API and try to implement that into the game.
 
-
+The file that contains my API code is within the RainSpawn.cs file.
 
 
 ##Trello Board:
@@ -18,7 +18,6 @@ There are many different weather APIs that I could find, so for my first sprint 
 ![text](https://raw.githubusercontent.com/Alli1223/comp140-api-hacking/master/Trello_Board/Screenshot%202016-03-24%2012.48.01.png "Trello board")
 
 ![text](https://raw.githubusercontent.com/Alli1223/comp140-api-hacking/master/Trello_Board/Screenshot%202016-04-12%2019.00.44.png "Trello board at the start of the first sprint")
-![text](https://raw.githubusercontent.com/Alli1223/comp140-api-hacking/master/Trello_Board/Screenshot%202016-05-02%2021.15.24.png "Review Two")
 
 ![text](https://raw.githubusercontent.com/Alli1223/comp140-api-hacking/master/Trello_Board/Screenshot%202016-05-02%2021.15.24.png "Trello board at the end of the second sprint")
 
