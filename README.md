@@ -42,6 +42,12 @@ I found a way to read XML tags in C#, so I am reading the weather codes tag and 
 
 One problem I have ran into is that the UNI has blocked one of the APIs I was using to get the users IP address, however it still works with my home internet.
 
+___
+##Final product:
+The file that contains my API code is within the RainSpawn.cs file.
+The EXE of the game is located within the GitHub directory, however the build version is too large to put on GitHub, so here is a dropbox link to it: https://dl.dropboxusercontent.com/u/11825562/Uni/relics%20localcopy11.zip
+
+
 ##Current APIs in use
 
 I used this API to get the weather at a city location:
