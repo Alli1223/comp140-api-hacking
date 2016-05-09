@@ -11,7 +11,9 @@ public class rainSpawn : MonoBehaviour
 {
 
     public GameObject rain;
-    public Animation rain_anim;
+    public Animator rain_animator;
+    public Animation rain_animation;
+
     private string APIHTTP = "api.openweathermap.org/data/2.5/weather?q=";
     private string APIKey = "&APPID=d3dcece6b95e45b36bc819afc815e9ef";   //My personal API key that allows for upto 60 calls a min
     private string APIUnits = "&units=metric"; //API unit standard - Metric or Imperial
@@ -22,8 +24,11 @@ public class rainSpawn : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        StartCoroutine(UpdateWeather(update_time));
         
+        rain_animator = GetComponent<Animator>();
+        rain_animation = GetComponent<Animation>();
+        StartCoroutine(UpdateWeather(update_time));
+
     }
 
     //Constantly calls the function GetWeather then waits a set amnmount of time
@@ -41,7 +46,7 @@ public class rainSpawn : MonoBehaviour
     {
         string API_IP_URL = "api.ipify.org";
         WWW API_IP = new WWW(API_IP_URL);
-        
+
         yield return API_IP;
         string IP_Address = API_IP.text;
 
@@ -65,11 +70,9 @@ public class rainSpawn : MonoBehaviour
 
     IEnumerator GetWeather(string location)
     {
-        //TODO: FIX THIS TO USE THE GENERATED LOCATION#
-
         //Removes the spaces from the string that it returns      
         location = location.Trim();
-        
+
         string url = APIHTTP + location + APIKey + APIUnits + APIFormat;
         WWW www = new WWW(url);
 
@@ -92,9 +95,10 @@ public class rainSpawn : MonoBehaviour
         }
     }
 
-
-    //Weather condition codes http://openweathermap.org/weather-conditions
-    //XML reader based off https://msdn.microsoft.com/en-us/library/cc189056(v=vs.95).aspx
+    /*
+    Weather condition codes http://openweathermap.org/weather-conditions
+    XML reader based off https://msdn.microsoft.com/en-us/library/cc189056(v=vs.95).aspx
+    */
     private string ReadXML(string XMLString)
     {
         StringBuilder output = new StringBuilder();
@@ -112,11 +116,12 @@ public class rainSpawn : MonoBehaviour
 
             resultvalue = Convert.ToInt32(value);
 
+
+            
             //Drizzle
             if (resultvalue >= 300 && resultvalue <= 321)
             {
                 Debug.Log("It's Drizzling");
-                rain_anim["Rain"].speed = 2;
                 rain.SetActive(true);
             }
 
@@ -125,40 +130,40 @@ public class rainSpawn : MonoBehaviour
             {
                 Debug.Log("It's either raining or drizzleing");
                 rain.SetActive(true);
-                rain_anim["Rain"].speed = 5;
-            }        
+
+            }
 
             //Clear OR Clouds
             //TODO: Fix the update bug when the setActive is false
             else if (resultvalue >= 800 && resultvalue <= 804)
             {
                 Debug.Log("It's either Clear or Cloudy");
-                rain.SetActive(false);
+                rain.SetActive(false); 
             }
 
             //Extreme
             else if (resultvalue >= 900 && resultvalue <= 906)
             {
-                Debug.Log("It's either clear or cloudy");
+                Debug.Log("It's really horrible out");
                 rain.SetActive(true);
+                //rain_anim["Rain"].speed = 5f;
             }
+
 
             output.AppendLine("Content of the Value element: " + reader.ReadElementContentAsString());
             string output_text = output.ToString();
             Debug.Log(output_text);
 
             return output_text;
-        }      
+        }
     }
 
 
 
 
-// Update is called once per frame
-void Update()
+    // Update is called once per frame
+    void Update()
     {
 
     }
 }
-
-
